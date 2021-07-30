@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="http://www.google.com"> test</a>
+    <input id="backbuttonstate" type="text" value="0" style="display:none;" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+var ibackbutton = document.getElementById("backbuttonstate");
+
+setTimeout(function () {
+
+    if (ibackbutton.value == "0") {
+        // Page has been loaded for the first time - Set marker
+        ibackbutton.value = "1";
+        alert('First time load');
+    } else {
+        // Back button has been fired.. Do Something different..
+        alert('Previously loaded - Returned from Back button');
+    }
+
+}, 200);
+
+}, false);
+    </script>
+</body>
+</html>

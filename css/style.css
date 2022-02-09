@@ -1,0 +1,765 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+#container {
+  display: flex;
+  background-color: white;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+
+header {
+  border-bottom: 1px solid #787c7e;
+}
+
+.wordle-title-main,
+.unlimited-title-main {
+  color: black;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+.unlimited-title-main {
+  font-size: 1.8rem;
+}
+
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+#game {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.game-mode-6 {
+  grid-template-columns: repeat(6, 1fr) !important;
+}
+.game-mode-7 {
+  grid-template-columns: repeat(7, 1fr) !important;
+}
+
+.board-cell {
+  border: 2px solid #787c7e;
+  min-width: 58px;
+  min-height: 58px;
+  max-width: 62px;
+  max-height: 62px;
+  font-size: 32px;
+  font-weight: 600;
+  color: black;
+  text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#keyboard-container {
+  height: 200px;
+}
+
+.keyboard-list {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto 9px;
+  touch-action: manipulation;
+}
+
+.keyboard-signle-btn {
+  font-weight: 600;
+  border: 0;
+  padding: 0;
+  height: 58px;
+  cursor: pointer;
+  background-color: #d3d6da;
+  color: #1a1a1b;
+  flex-grow: 1;
+  margin-left: 7px;
+  border-radius: 4px;
+  user-select: none;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.keyboard-big-btn {
+  flex-grow: 1.5;
+}
+
+.half-spacer {
+  flex-grow: 0.5;
+}
+
+.board-cell.animate__animated.animate__flipInX {
+  animation-duration: 1s !important;
+}
+
+#restart-game {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 0 999px 999px rgb(0 0 0 / 20%);
+  display: none;
+}
+
+#restart-game button {
+  width: 80px;
+  margin: auto;
+  padding: 10px;
+  background: #6aaa64;
+  border: none;
+  cursor: pointer;
+}
+
+#restart-game button svg g {
+  fill: white;
+}
+
+#messages div {
+  font-size: 1.17rem;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+  color: white;
+  display: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.x-btn {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+#congrats-msg {
+  background-color: #6aaa64;
+}
+
+#fail-msg {
+  border: 2px solid #dc3545;
+  color: #dc3545 !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .wordle-title-main {
+    font-size: 2rem;
+  }
+
+  .board-cell {
+    min-width: 50px;
+    min-height: 50px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .game-mode-7 .board-cell {
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
+  }
+  #info-message-container,
+  #options-container {
+    padding: 20px;
+    left: 0;
+    width: 88% !important;
+  }
+}
+
+.form {
+  margin: 50px auto;
+  width: 300px;
+  padding: 30px 25px;
+  background: white;
+}
+h1.login-title {
+  color: #666;
+  margin: 0px auto 25px;
+  font-size: 25px;
+  font-weight: 300;
+  text-align: center;
+}
+.login-input {
+  font-size: 15px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 25px;
+  height: 25px;
+  width: calc(100% - 23px);
+}
+.login-input:focus {
+  border-color: #6e8095;
+  outline: none;
+}
+.login-button {
+  color: #fff;
+  background: #55a1ff;
+  border: 0;
+  outline: 0;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+.link {
+  color: #666;
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+.link a {
+  color: #666;
+}
+h3 {
+  font-weight: normal;
+  text-align: center;
+}
+#game-options-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 330px;
+  position: relative;
+  width: 100%;
+}
+
+div#user-menu-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div#user-menu-container > div {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  width: max-content;
+}
+div#user-menu-container > div > ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgb(211, 214, 218);
+  padding: 10px;
+}
+div#user-menu-container > div > ul a {
+  font-size: 1rem;
+  color: black;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+#game header {
+  display: grid;
+  grid-template-columns: 2fr 6fr 2fr;
+}
+
+.header-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-menu button {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #878a8c;
+}
+
+.show {
+  display: block !important;
+}
+
+#game-options-container button {
+  padding: 10px 20px;
+  border: none;
+  background: #17a2b8 !important;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-not-logged-in-buttons {
+  filter: brightness(0.6);
+  cursor: not-allowed !important;
+}
+
+.not-logged-in-msg {
+  position: absolute;
+  top: 106%;
+  width: 100%;
+  text-align: center;
+  color: #878a8c;
+}
+
+#info-message-container,
+#options-container {
+  position: fixed;
+  top: 0;
+  background: white;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 0 999px white;
+  max-width: 470px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+  display: none;
+  z-index: 999;
+}
+.close-info,
+.close-settings,
+.close-stats {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  font-size: 20px;
+  cursor: pointer;
+}
+.close-stats {
+  right: 5px;
+}
+
+.info-example {
+  display: flex;
+  flex-direction: revert;
+  gap: 5px;
+}
+#button-3 .knobs:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  width: 12px;
+  height: 6px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  padding: 5px 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.35),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+#button-3 .checkbox:active + .knobs:before {
+  width: 46px;
+  border-radius: 100px;
+}
+#button-3 .checkbox:checked:active + .knobs:before {
+  margin-left: -26px;
+}
+#button-3 .checkbox:checked + .knobs:before {
+  content: "";
+  left: 21px;
+  background-color: #fff;
+}
+#button-3 .checkbox:checked ~ .layer {
+  background-color: #17c2bd;
+}
+.knobs,
+.layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#button-3.button {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  margin: -20px auto 0 auto;
+  overflow: hidden;
+  margin: 0;
+}
+#button-3.button.r,
+#button-3.button.r .layer {
+  border-radius: 100px;
+}
+#button-3 .checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+#button-3 .knobs {
+  z-index: 2;
+}
+#button-3 .layer {
+  width: 100%;
+  background-color: #878a8c;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+.settings-option {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid rgb(211, 214, 218);
+  align-items: center;
+}
+
+.settings-option h2 {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.settings-option div > p {
+  font-size: 12px;
+  color: #787c7e;
+}
+#options-container {
+  gap: 0;
+}
+.dark-mode-text {
+  color: #d7dadc !important;
+}
+.dark-container {
+  background-color: #090909 !important;
+  box-shadow: 0 0 0 999px #090909 !important;
+}
+
+.dark-mode-keyboard {
+  background-color: #818384;
+  color: white;
+}
+
+.dark-mode-cell {
+  color: white;
+}
+
+div#score-board {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  height: 70%;
+  max-height: 400px;
+  box-shadow: 0 4px 23px 0 rgb(0 0 0 / 20%);
+  padding-top: 20px;
+  display: none;
+}
+div#score-board .number-stats {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  max-width: 230px;
+  margin: 0 auto;
+}
+div#score-board h2 {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+div#score-board .number-stats .stat-number {
+  font-size: 36px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  font-variant-numeric: proportional-nums;
+}
+div#score-board .number-stats .stat-text {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+div#score-board .number-stats .signle-stat {
+  flex: 1;
+}
+
+.share-btn button,
+.restart-game-btn button {
+  background-color: #538d4e;
+  color: #d7dadc;
+  font-family: inherit;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  font-size: 20px;
+  height: 52px;
+  filter: brightness(100%);
+  -webkit-filter: brightness(100%);
+  flex: 1;
+  padding: 0 20px;
+}
+.restart-game-btn button {
+  background-color: #dc3545;
+}
+.share-btn,
+.restart-game-btn {
+  max-width: 170px;
+  min-width: 140px;
+}
+.share-sections-btn {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.unselectable {
+  user-select: none;
+}
+#sharing-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.overlay-score-board {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: none;
+}
+
+.logged-out-stats {
+  position: absolute;
+  top: 51px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 20px;
+  box-shadow: 1px 20px 0 14px rgb(255 255 255 / 80%);
+  font-weight: bold;
+}
+.logged-out-stats-dark {
+  background: rgba(18, 18, 19, 0.9);
+  box-shadow: 1px 20px 0 14px rgb(18 18 19 / 80%);
+  color: white;
+}
+
+@media screen and (max-height: 750px) {
+  .board-cell {
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
+  }
+  .keyboard-signle-btn {
+    height: 42px;
+  }
+  .not-logged-in-msg {
+    font-size: 12px;
+    margin-top: 2px;
+  }
+}
+
+.all-users-table {
+  margin-top: 30px;
+  border-spacing: 0;
+}
+.form-administrator {
+  margin: 50px auto;
+  min-width: 300px;
+  padding: 30px 25px;
+  background: white;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+.form-administrator table th {
+  width: 100%;
+  padding: 8px;
+}
+
+.form-administrator table td {
+  padding: 8px;
+  width: 100%;
+}
+.form-administrator table tr {
+  display: flex;
+  flex: 1;
+}
+.form-administrator table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+
+.table-to-csv {
+  margin: 10px auto 10px auto;
+  width: 200px;
+  padding: 10px;
+  background: #17a2b8 !important;
+  border-color: #17a2b8 !important;
+  color: white;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.hide {
+  display: none !important;
+}
+@media screen and (min-height: 750px) and (max-height: 800px) {
+  .board-cell {
+    min-width: 42px;
+    min-height: 42px;
+    width: 42px;
+    height: 42px;
+  }
+  .keyboard-signle-btn {
+    height: 44px;
+  }
+  .not-logged-in-msg {
+    font-size: 12px;
+    margin-top: 2px;
+  }
+}
+
+@media screen and (min-height: 511px) and (max-height: 650px) {
+  .unlimited-title-main {
+    font-size: 1.5rem;
+  }
+  .board-cell,
+  .game-mode-7 .board-cell {
+    min-width: 30px;
+    min-height: 30px;
+    width: 30px;
+    height: 30px;
+    font-size: 19px;
+  }
+  .keyboard-signle-btn {
+    height: 29px;
+  }
+}
+
+@media screen and (min-height: 480px) and (max-height: 551px) {
+  .unlimited-title-main {
+    font-size: 1.2rem;
+  }
+  .board-cell,
+  .game-mode-7 .board-cell {
+    min-width: 30px;
+    min-height: 30px;
+    width: 30px;
+    height: 30px;
+    font-size: 17px;
+  }
+  .user-not-logged-in-buttons {
+    display: none !important;
+  }
+  .keyboard-signle-btn {
+    height: 29px;
+  }
+  .wordle-title-main {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-height: 480px) {
+  .unlimited-title-main {
+    font-size: 1rem;
+  }
+  .board-cell,
+  .game-mode-7 .board-cell {
+    min-width: 20px;
+    min-height: 20px;
+    width: 20px;
+    height: 20px;
+    font-size: 17px;
+  }
+  .user-not-logged-in-buttons {
+    display: none !important;
+  }
+  .keyboard-signle-btn {
+    height: 20px;
+    font-size: 10px;
+  }
+  .wordle-title-main {
+    font-size: 1rem;
+  }
+
+  #game-options-container button {
+    font-size: 11px !important;
+    padding: 3px 4px !important;
+  }
+  #game-container {
+    justify-content: flex-start;
+  }
+  .not-logged-in-msg {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  #messages div {
+    font-size: 12px;
+    padding: 3px 5px;
+  }
+}

@@ -193,7 +193,7 @@
           </div>
           <div class="settings-option">
             <h2>Feedback</h2>
-            <div><a href="http://twitter.com">Twitter</a> | <a href="mailto:neonlightyt7@gmail.com">Email</a></div>
+            <div><a href="http://twitter.com">Twitter</a> | <a href="mailto:vapeboxcy@gmail.com">Email</a></div>
           </div>
          <p class="close-settings"><i class="fas fa-times"></i></p>
              </div>
